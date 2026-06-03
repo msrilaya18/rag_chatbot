@@ -4,7 +4,7 @@ A full-stack RAG (Retrieval-Augmented Generation) chatbot that compares two soci
 
 ## Demo
 
-> Live demo: [localhost:3000](http://localhost:3000)  
+> Live demo: [[localhost:3000](http://localhost:3000)  ](https://rag-chatbot-mu-rust.vercel.app)
 > Stack: Next.js + FastAPI + LangGraph + ChromaDB + Gemini
 
 ---
