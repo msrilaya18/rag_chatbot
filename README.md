@@ -118,6 +118,29 @@ Open [http://localhost:3000](http://localhost:3000)
 
 ---
 
+## Deployment Guide
+
+### 1. Backend Deployment (Render or Railway)
+Deploy the FastAPI backend container to Render or Railway using the included `Dockerfile`:
+* **Render.com Setup:**
+  1. Create a free account on [Render.com](https://render.com) and click **New +** -> **Web Service**.
+  2. Connect your GitHub repository.
+  3. Set the **Root Directory** to `backend/`.
+  4. Select **Docker** as the Runtime (Render will automatically detect the `Dockerfile`).
+  5. Under **Environment Variables**, add:
+     * `GOOGLE_API_KEY`: Your Gemini API key from AI Studio.
+  6. Click **Deploy Web Service**. Once deployed, copy your live backend URL (e.g., `https://rag-chatbot-backend.onrender.com`).
+
+### 2. Frontend Deployment (Vercel)
+Deploy the Next.js frontend to Vercel (free, automatic builds on push):
+1. Sign up on [Vercel](https://vercel.com) and import this GitHub repository.
+2. Set the **Root Directory** to `frontend/`.
+3. Under **Environment Variables**, add:
+   * `BACKEND_URL`: Your live backend URL from the step above (e.g., `https://rag-chatbot-backend.onrender.com`).
+4. Click **Deploy**. Vercel will generate your live frontend URL (e.g., `https://rag-chatbot.vercel.app`).
+
+---
+
 ## Usage
 
 1. Paste a **YouTube** URL (video, short, or regular) into **Video A**
