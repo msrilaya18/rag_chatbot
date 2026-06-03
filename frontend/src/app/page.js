@@ -5,6 +5,17 @@ import InputForm from "../components/InputForm";
 import VideoCard from "../components/VideoCard";
 import ChatPanel from "../components/ChatPanel";
 
+const getApiBase = () => {
+  if (typeof window !== "undefined") {
+    const hostname = window.location.hostname;
+    if (hostname === "localhost" || hostname === "127.0.0.1") {
+      return "http://localhost:8000";
+    }
+  }
+  return "https://rag-chatbot-backend-otxc.onrender.com";
+};
+const API_BASE = getApiBase();
+
 export default function Home() {
   const [sessionId, setSessionId] = useState("");
   const [videoA, setVideoA] = useState(null);
@@ -22,7 +33,7 @@ export default function Home() {
         if (session_id && video_a && video_b) {
           // Verify session still valid on backend
           setIsRecovering(true);
-          fetch(`/api/session/${session_id}`)
+          fetch(`${API_BASE}/api/session/${session_id}`)
             .then((res) => {
               if (res.ok) {
                 setSessionId(session_id);
@@ -47,7 +58,7 @@ export default function Home() {
     setError(null);
 
     try {
-      const response = await fetch("/api/analyze", {
+      const response = await fetch(`${API_BASE}/api/analyze`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -91,7 +102,7 @@ export default function Home() {
     if (sessionId) {
       // Best-effort delete session from backend
       try {
-        await fetch(`/api/session/${sessionId}`, { method: "DELETE" });
+        await fetch(`${API_BASE}/api/session/${sessionId}`, { method: "DELETE" });
       } catch (err) {
         console.error("Failed to delete session:", err);
       }

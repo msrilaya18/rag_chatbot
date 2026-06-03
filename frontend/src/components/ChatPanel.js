@@ -3,6 +3,17 @@
 import React, { useState, useEffect, useRef } from "react";
 import MessageBubble from "./MessageBubble";
 
+const getApiBase = () => {
+  if (typeof window !== "undefined") {
+    const hostname = window.location.hostname;
+    if (hostname === "localhost" || hostname === "127.0.0.1") {
+      return "http://localhost:8000";
+    }
+  }
+  return "https://rag-chatbot-backend-otxc.onrender.com";
+};
+const API_BASE = getApiBase();
+
 const SUGGESTED_QUESTIONS = [
   "Why did Video A get more engagement than Video B?",
   "What's the engagement rate of each?",
@@ -55,7 +66,7 @@ export default function ChatPanel({ sessionId, videoData }) {
     setMessages((prev) => [...prev, assistantPlaceholder]);
 
     try {
-      const response = await fetch("/api/chat", {
+      const response = await fetch(`${API_BASE}/api/chat`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
