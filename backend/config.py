@@ -9,7 +9,7 @@ load_dotenv(Path(__file__).parent.parent / ".env", override=True)
 class Settings:
     GOOGLE_API_KEY: str = os.getenv("GOOGLE_API_KEY", "")
     CHROMA_PERSIST_DIR: str = os.getenv("CHROMA_PERSIST_DIR", "./chroma_data")
-    MODEL_NAME: str = "gemini-2.5-flash"
+    MODEL_NAME: str = "gemini-1.5-flash"
     EMBEDDING_MODEL: str = "models/gemini-embedding-001"
     CHUNK_SIZE: int = 500
     CHUNK_OVERLAP: int = 50
