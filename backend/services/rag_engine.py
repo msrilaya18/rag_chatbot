@@ -135,6 +135,8 @@ class RAGEngine:
         MAX_RETRIES = 4
         for attempt in range(MAX_RETRIES):
             try:
+                if attempt > 0:
+                    yield ChatChunk(type="clear")
                 async for chunk in self._llm.astream(lc_messages):
                     raw = chunk.content if hasattr(chunk, "content") else str(chunk)
                     if not raw:
